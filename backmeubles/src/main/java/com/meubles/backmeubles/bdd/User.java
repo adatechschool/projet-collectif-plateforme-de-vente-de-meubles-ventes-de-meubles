@@ -1,9 +1,6 @@
 package com.meubles.backmeubles.bdd;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name="users")
@@ -14,8 +11,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NonNull
     private String email;
+    @NonNull
     private String mdp;
+    @NonNull
     private String nom;
     private Boolean admin = false;
 }
