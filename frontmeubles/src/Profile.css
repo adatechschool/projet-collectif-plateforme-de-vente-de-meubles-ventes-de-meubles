@@ -1,0 +1,40 @@
+  /* Profile.css */
+
+.sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    height: 100vh;
+    margin-left: -10px; /* Ajuster la marge à votre convenance */
+  }
+  
+  .user-image-container {
+    text-align: center;
+    margin-left: -10px; /* Ajuster la marge à votre convenance */
+  }
+
+  .user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .user-name {
+    text-align: center;
+    margin-top: 10px;
+    margin-left: -10px; 
+  }
+  
+  .user-description {
+    margin-top: 10px;
+    margin-left: -10px; 
+  }
+  
+
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-top: -400px; 
+  }
+  
