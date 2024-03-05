@@ -11,11 +11,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NonNull
+
     private String email;
-    @NonNull
+
     private String mdp;
-    @NonNull
     private String nom;
     private Boolean admin = false;
+
+
 }
