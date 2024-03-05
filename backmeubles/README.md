@@ -1,7 +1,11 @@
 DOCUMENTATION BASE DE DONNEE:
 Créer une base de donnée nommé "projet_meuble" dans PHP-MYADMIN
-Mettre son local host SQL sur 3306
 Run le projet avec intelliJ afin d'initialiser les tables dans la base de donnée (NE PLUS RIEN CREER DANS PHPMYADMIN, puisque les tables se créent à partir du code JAVA!!)
+Mettre son local host SQL sur 3306
+Importer le projet_meuble.sql dans mySQL (ce sont les données de 5 utilisateurs et 5 meubles pour exemple)
+
+
+
 
 DOCUMENTATION APPEL API:
 Local host: http://localhost:8080/
@@ -66,3 +70,5 @@ PUT http://localhost:8080/meubles/update/{id}
 
 - Supprimer un meuble:
 DELETE http://localhost:8080/meubles/delete/{id}
+
+
