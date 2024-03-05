@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import Profile from "./Profile";
 import Footer from "./footer";
+import Encart from "./encart";
 
 import NotFound from "./NotFound";
 export default function App() {
@@ -100,7 +101,7 @@ export default function App() {
                     <div key={index} className="grid-item">
                       <img src={process.env.PUBLIC_URL + `/meuble/${image}`} alt={`Meuble ${index + 1}`} />
                       <p>Nom du Meuble {index + 1}</p>
-                      <p>Prix: [Ajouter le prix ici]</p>
+                      <p>Prix: [Ajouter le prix ici]</p><Encart/>
                     </div>
                   ))}
                 </div>
