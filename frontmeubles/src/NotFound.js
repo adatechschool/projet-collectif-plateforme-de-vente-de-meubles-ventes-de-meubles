@@ -16,7 +16,7 @@ const NotFound = () => {
 
   return (
     <animated.div style={{ ...fadeIn, textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
-      {/* Ajoutez votre image ici */}
+    
       <img src={NotFoundImage} alt="404 Not Found" style={{ width: "300px", height: "300px", marginBottom: "20px" }} />
 
       <h2 style={{ color: "#ff3366", margin: "0" }}>404 - Page not found</h2>
@@ -27,7 +27,7 @@ const NotFound = () => {
         Retour à la page d'accueil
       </animated.a>
 
-      {/* Ajoutez des sauts de ligne pour pousser le footer */}
+      {/* Ajoute des sauts de ligne pour pousser le footer */}
       <br />
       <br />
       <br />
