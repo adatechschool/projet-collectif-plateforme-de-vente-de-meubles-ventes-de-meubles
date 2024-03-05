@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import Profile from "./Profile";
+import Footer from "./footer";
 
 export default function App() {
   const [isNavOpen, setNavOpen] = useState(false);
@@ -105,8 +106,10 @@ export default function App() {
               </>
             }
           />
+          
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
