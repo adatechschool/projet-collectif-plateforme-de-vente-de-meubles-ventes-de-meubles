@@ -1,7 +1,14 @@
 package com.meubles.backmeubles.bdd;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Table(name="meubles")
 public class Meuble {
     @Id
