@@ -15,19 +15,25 @@ const NotFound = () => {
   });
 
   return (
-    <animated.div style={{ ...fadeIn, textAlign: "center", marginTop: "50px" }}>
+    <animated.div style={{ ...fadeIn, textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
       {/* Ajoutez votre image ici */}
-      <img src={NotFoundImage} alt="404 Not Found" style={{ width: "300px", height: "300px" }} />
+      <img src={NotFoundImage} alt="404 Not Found" style={{ width: "300px", height: "300px", marginBottom: "20px" }} />
 
-      <h2 style={{ color: "#ff3366" }}>404 - Page not found</h2>
-      <p style={{ color: "#777" }}>Oops! La page que vous recherchez n'existe pas.</p>
+      <h2 style={{ color: "#ff3366", margin: "0" }}>404 - Page not found</h2>
+      <p style={{ color: "#777", margin: "10px 0" }}>Oops! La page que vous recherchez n'existe pas.</p>
 
       {/* Ajoutez une animation au lien de retour */}
       <animated.a href="/" style={{ color: "#4CAF50", textDecoration: "none", fontWeight: "bold" }}>
         Retour à la page d'accueil
       </animated.a>
+
+      {/* Ajoutez des sauts de ligne pour pousser le footer */}
+      <br />
+      <br />
+      <br />
     </animated.div>
   );
 };
 
 export default NotFound;
+
