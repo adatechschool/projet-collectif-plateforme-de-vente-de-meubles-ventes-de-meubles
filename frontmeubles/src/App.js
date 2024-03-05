@@ -7,12 +7,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import Profile from "./Profile";
-<<<<<<< Updated upstream
 import Footer from "./footer";
 
-=======
 import NotFound from "./NotFound";
->>>>>>> Stashed changes
 export default function App() {
   const [isNavOpen, setNavOpen] = useState(false);
 
@@ -110,12 +107,9 @@ export default function App() {
               </>
             }
           />
-<<<<<<< Updated upstream
           
-=======
           {/* Ajoutez la route pour la page d'erreur 404 */}
           <Route path="*" element={<NotFound />} />
->>>>>>> Stashed changes
         </Routes>
       </div>
       <Footer />
