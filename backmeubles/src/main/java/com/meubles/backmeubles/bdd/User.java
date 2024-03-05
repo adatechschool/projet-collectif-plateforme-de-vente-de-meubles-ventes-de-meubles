@@ -13,7 +13,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
+    private Integer id;
     private String email;
     private String mdp;
     private String nom;

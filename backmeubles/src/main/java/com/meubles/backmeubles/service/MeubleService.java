@@ -44,4 +44,6 @@ public class MeubleService implements tableService<Meuble>{
         repositoryMeuble.deleteById(id);
         return "Meuble Supprimé";
     }
+
+
 }
