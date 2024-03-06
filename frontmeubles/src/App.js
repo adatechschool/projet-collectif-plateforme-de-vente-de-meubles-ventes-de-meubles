@@ -7,12 +7,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import Profile from "./Profile";
-<<<<<<< Updated upstream
 import Footer from "./footer";
 import Encart from "./encart";
-=======
 import Panier from "./Panier";
->>>>>>> Stashed changes
 
 import NotFound from "./NotFound";
 export default function App() {
@@ -34,6 +31,7 @@ export default function App() {
 
   const carouselImages = ["table.png", "chaise.jpeg", "armoire.jpeg"];
   const gridImages = ["table.png", "chaise.jpeg", "armoire.jpeg", "chaisegamer.jpeg", "lampe.webp", "armoireantique.jpeg"];
+
   return (
     <Router>
       <div className="App">
@@ -78,6 +76,7 @@ export default function App() {
 
         <Routes>
           <Route path="/profile/*" element={<Profile />} />
+          <Route path="/panier" element={<Panier />} />
           <Route
             path="/"
             element={
