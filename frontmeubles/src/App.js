@@ -1,8 +1,7 @@
-// App.js
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, NavLink, Route, Routes } from "react-router-dom";
 import Slider from "react-slick";
+import axios from 'axios';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
@@ -12,10 +11,14 @@ import Encart from "./encart";
 import Panier from "./Panier";
 import Login from "./Login";
 import ProductManagement from "./gestionproduit";
-
 import NotFound from "./NotFound";
+import SearchResults from "./SearchResults";
+
 export default function App() {
   const [isNavOpen, setNavOpen] = useState(false);
+  const [furnitureData, setFurnitureData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const toggleNav = () => {
     setNavOpen(!isNavOpen);
@@ -31,8 +34,26 @@ export default function App() {
     autoplaySpeed: 3000,
   };
 
-  const carouselImages = ["table.png", "chaise.jpeg", "armoire.jpeg"];
-  const gridImages = ["table.png", "chaise.jpeg", "armoire.jpeg", "chaisegamer.jpeg", "lampe.webp", "armoireantique.jpeg"];
+  useEffect(() => {
+    const fetchFurnitureData = async () => {
+      try {
+        const response = await axios.get('/meubles/read');
+        console.log('Response from API:', response.data);
+        setFurnitureData(response.data);
+      } catch (error) {
+        console.error('Error fetching furniture data:', error);
+      }
+    };
+  
+    fetchFurnitureData();
+  }, []);
+
+  const handleSearch = () => {
+    const results = furnitureData.filter((furniture) =>
+      furniture.nom.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setSearchResults(results);
+  };
 
   return (
     <Router>
@@ -42,8 +63,17 @@ export default function App() {
             <img src={process.env.PUBLIC_URL + "/user.jpeg"} alt="user" className="profile-picture" />
           </div>
           <div className="search-container">
-            <input type="text" placeholder="Rechercher des meubles d'occasion..." className="search-bar" id="searchBar" />
-            <button className="search-button">Rechercher</button>
+            <input
+              type="text"
+              placeholder="Rechercher des meubles d'occasion..."
+              className="search-bar"
+              id="searchBar"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button className="search-button" onClick={handleSearch}>
+              Rechercher
+            </button>
             <img src={process.env.PUBLIC_URL + "/LogoAmpunv.jpeg"} alt="Logo du site" className="site-logo" />
           </div>
 
@@ -64,7 +94,6 @@ export default function App() {
             </div>
           )}
 
-          {/* Ajouter le bouton Vendre qui s'affiche uniquement dans la page Profile */}
           <Routes>
             <Route
               path="/profile"
@@ -76,28 +105,29 @@ export default function App() {
                 </div>
               }
             />
+            <Route
+              path="/search-results"
+              element={<SearchResults results={searchResults} />}
+            />
           </Routes>
         </header>
 
         <Routes>
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/panier" element={<Panier />} />
-          <Route path="/Login/*" element ={<Login/>} />
+          <Route path="/Login/*" element={<Login />} />
           <Route
             path="/"
             element={
               <>
-                {/* Ajouter la phrase "Les Bons plans :" */}
                 <div style={{ textAlign: "left", marginLeft: "100px" }}>
                   <h2>Les Bons plans :</h2>
                 </div>
-                
-                {/* Reste du contenu de la page d'accueil */}
                 <Slider {...carouselSettings} className="carousel-container">
-                  {carouselImages.map((image, index) => (
-                    <div key={index} className="carousel-item">
-                      <img src={process.env.PUBLIC_URL + `/meuble/${image}`} alt={`Meuble ${index + 1}`} />
-                      <p>Nom du Meuble {index + 1}</p>
+                  {furnitureData.map((furniture) => (
+                    <div key={furniture.id} className="carousel-item">
+                      <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
+                      <p>{furniture.nom}</p>
                     </div>
                   ))}
                 </Slider>
@@ -106,19 +136,30 @@ export default function App() {
                 <br></br>
                 <h3>Les Nouveautés:</h3>
                 <div className="grid-container">
-                  {gridImages.map((image, index) => (
-                    <div key={index} className="grid-item">
-                      <img src={process.env.PUBLIC_URL + `/meuble/${image}`} alt={`Meuble ${index + 1}`} />
-                      <p>Nom du Meuble {index + 1}</p>
-                      <p>Prix: [Ajouter le prix ici]</p><Encart/>
-                    </div>
-                  ))}
+                  {searchResults.length > 0 ? (
+                    searchResults.map((furniture) => (
+                      <div key={furniture.id} className="grid-item">
+                        <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
+                        <p>{furniture.nom}</p>
+                        <p>Prix: {furniture.prix} €</p>
+                        <Encart />
+                      </div>
+                    ))
+                  ) : (
+                    furnitureData.map((furniture) => (
+                      <div key={furniture.id} className="grid-item">
+                        <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
+                        <p>{furniture.nom}</p>
+                        <p>Prix: {furniture.prix} €</p>
+                        <Encart />
+                      </div>
+                    ))
+                  )}
                 </div>
               </>
             }
           />
-           <Route path="/product-management" element={<ProductManagement />} />
-          {/* Ajoutez la route pour la page d'erreur 404 */}
+          <Route path="/product-management" element={<ProductManagement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
