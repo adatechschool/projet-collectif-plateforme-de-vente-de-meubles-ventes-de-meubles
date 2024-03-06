@@ -1,9 +1,9 @@
-// Profile.js
-
 import React from 'react';
+import { Link } from 'react-router-dom'; // Assurez-vous d'avoir installé 'react-router-dom'
 import './Profile.css'; // Assurez-vous d'importer votre fichier CSS
 
-const Profile = () => {
+// Imaginons que isAdmin soit déterminé à un niveau supérieur et passé en tant que prop
+const Profile = ({ isAdmin }) => {
   // Exemple de données des meubles à vendre du user
   const userFurniture = [
     { image: 'table.png', name: 'Meuble 1', price: 100 },
@@ -49,6 +49,19 @@ const Profile = () => {
           ))}
         </div>
       </div>
+
+      {/* Section Administration pour les administrateurs */}
+      {isAdmin && (
+        <div className="admin-section">
+          <h3>Administration</h3>
+          <ul>
+            <li>
+              <Link to="/product-management">Gestion des produits</Link>
+            </li>
+            {/* Ajoutez d'autres liens ou options ici selon vos besoins */}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

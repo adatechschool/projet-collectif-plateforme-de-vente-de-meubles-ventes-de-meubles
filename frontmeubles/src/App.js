@@ -10,6 +10,7 @@ import Profile from "./Profile";
 import Footer from "./footer";
 import Encart from "./encart";
 import Panier from "./Panier";
+import ProductManagement from "./gestionproduit";
 
 import NotFound from "./NotFound";
 export default function App() {
@@ -111,7 +112,7 @@ export default function App() {
               </>
             }
           />
-          
+           <Route path="/product-management" element={<ProductManagement />} />
           {/* Ajoutez la route pour la page d'erreur 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
