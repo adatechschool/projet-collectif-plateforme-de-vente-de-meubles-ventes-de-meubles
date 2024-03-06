@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Assurez-vous d'avoir installé 'react-router-dom'
 import './Profile.css'; // Assurez-vous d'importer votre fichier CSS
 
-// Imaginons que isAdmin soit déterminé à un niveau supérieur et passé en tant que prop
 const Profile = ({ isAdmin }) => {
   // Exemple de données des meubles à vendre du user
   const userFurniture = [
@@ -11,6 +10,27 @@ const Profile = ({ isAdmin }) => {
     { image: 'lampe.webp', name: 'Meuble 3', price: 200 },
     // Ajoutez autant d'éléments que nécessaire
   ];
+
+  // État pour la soumission d'un nouveau meuble
+  const [newFurniture, setNewFurniture] = useState({ name: '', price: '', image: null });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewFurniture({ ...newFurniture, [name]: value });
+  };
+
+  const handleImageChange = (e) => {
+    setNewFurniture({ ...newFurniture, image: e.target.files[0] });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Ici, vous enverriez les données à votre backend ou base de données
+    console.log(newFurniture);
+    alert('Soumission envoyée !');
+    // Réinitialiser le formulaire après la soumission
+    setNewFurniture({ name: '', price: '', image: null });
+  };
 
   return (
     <div className="profile-container">
@@ -48,6 +68,33 @@ const Profile = ({ isAdmin }) => {
             </div>
           ))}
         </div>
+        
+        {/* Section pour proposer un nouveau meuble à vendre pour les non-administrateurs */}
+        {!isAdmin && (
+          <div className="submit-furniture-section">
+            <h2>Proposer un meuble à vendre</h2>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Nom du meuble"
+                value={newFurniture.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="price"
+                placeholder="Prix"
+                value={newFurniture.price}
+                onChange={handleChange}
+                required
+              />
+              <input type="file" name="image" onChange={handleImageChange} required />
+              <button type="submit">Soumettre le meuble</button>
+            </form>
+          </div>
+        )}
       </div>
 
       {/* Section Administration pour les administrateurs */}
