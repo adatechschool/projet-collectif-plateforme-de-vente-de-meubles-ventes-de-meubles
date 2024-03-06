@@ -36,6 +36,7 @@ public class ImageService {
         Optional<Image> dbImage = repositoryImage.findByName(name);
 
         return Image.builder()
+                .id(dbImage.get().getId())
                 .name(dbImage.get().getName())
                 .type(dbImage.get().getType())
                 .image(ImageUtil.decompressImage(dbImage.get().getImage())).build();
@@ -47,6 +48,12 @@ public class ImageService {
         Optional<Image> dbImage = repositoryImage.findByName(name);
         byte[] image = ImageUtil.decompressImage(dbImage.get().getImage());
         return image;
+    }
+
+    @Transactional
+    public String supprimer(Long id) {
+        repositoryImage.deleteById(id);
+        return "Image Supprimé";
     }
 
 

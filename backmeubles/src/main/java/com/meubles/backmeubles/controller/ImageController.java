@@ -18,7 +18,7 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
         String response = imageService.uploadImage(file);
 
@@ -41,6 +41,11 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(image);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        return imageService.supprimer(id);
     }
 
 
