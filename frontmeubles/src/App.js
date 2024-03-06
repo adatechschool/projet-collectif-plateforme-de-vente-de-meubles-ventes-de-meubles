@@ -7,13 +7,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import Profile from "./Profile";
-<<<<<<< Updated upstream
 import Footer from "./footer";
 import Encart from "./encart";
 import Panier from "./Panier";
-=======
 import Login from "./Login";
->>>>>>> Stashed changes
 import ProductManagement from "./gestionproduit";
 
 import NotFound from "./NotFound";
@@ -84,11 +81,8 @@ export default function App() {
 
         <Routes>
           <Route path="/profile/*" element={<Profile />} />
-<<<<<<< Updated upstream
           <Route path="/panier" element={<Panier />} />
-=======
           <Route path="/Login/*" element ={<Login/>} />
->>>>>>> Stashed changes
           <Route
             path="/"
             element={
