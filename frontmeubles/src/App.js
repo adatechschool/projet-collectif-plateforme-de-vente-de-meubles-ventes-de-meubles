@@ -14,6 +14,7 @@ import Panier from "./Panier";
 =======
 import Login from "./Login";
 >>>>>>> Stashed changes
+import ProductManagement from "./gestionproduit";
 
 import NotFound from "./NotFound";
 export default function App() {
@@ -122,7 +123,7 @@ export default function App() {
               </>
             }
           />
-          
+           <Route path="/product-management" element={<ProductManagement />} />
           {/* Ajoutez la route pour la page d'erreur 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
