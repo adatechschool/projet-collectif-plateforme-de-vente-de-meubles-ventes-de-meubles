@@ -96,3 +96,4 @@ DELETE http://localhost:8080/image/delete/{id}
 
 OBJECTIFS :
 - Relier la table image aux deux autres tables pour qu'un user ai une photo de profil et un meuble puissent avoir plusieurs images 
+Tuto qui peut aider: https://www.youtube.com/watch?v=9uCAGlrpBbw
