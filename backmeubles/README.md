@@ -1,14 +1,14 @@
 DOCUMENTATION BASE DE DONNEE:
-Créer une base de donnée nommé "projet_meuble" dans PHP-MYADMIN
-Run le projet avec intelliJ afin d'initialiser les tables dans la base de donnée (NE PLUS RIEN CREER DANS PHPMYADMIN, puisque les tables se créent à partir du code JAVA!!)
-Mettre son local host SQL sur 3306
-Importer le projet_meuble.sql dans mySQL (ce sont les données de 5 utilisateurs et 5 meubles pour exemple)
+- Créer une base de donnée nommé "projet_meuble" dans PHP-MYADMIN
+- Run le projet avec intelliJ afin d'initialiser les tables dans la base de donnée (NE PLUS RIEN CREER DANS PHPMYADMIN, puisque les tables se créent à partir du code JAVA!!)
+- Mettre son local host SQL sur 3306
+- Importer le projet_meuble.sql dans mySQL (ce sont les données de 5 utilisateurs et 5 meubles pour exemple)
 
 
 
 
 DOCUMENTATION APPEL API:
-Local host: http://localhost:8080/
+- Local host: http://localhost:8080/
 
 Pour la table "users":
 - Création d'un user:
@@ -41,7 +41,7 @@ DELETE http://localhost:8080/users/delete/{id}
 
 
 
-Pour la table "meubles:
+Pour la table "meubles":
 - Création d'un meuble:
 POST http://localhost:8080/meubles/create
 Les paramètres sont:
@@ -72,3 +72,27 @@ PUT http://localhost:8080/meubles/update/{id}
 DELETE http://localhost:8080/meubles/delete/{id}
 
 
+
+Pour la table images:
+Les paramètres sont:
+- name
+- type
+- image
+id est en auto incrémentation
+
+
+- Pour la création d'une "image":
+POST http://localhost:8080/image/create
+Pour la méthode post, il faut passer par body/form-data et mettre en key images et une value de type file
+- Pour afficher l'image:
+GET http://localhost:8080/image/{name}
+- Pour afficher les infos de l'image
+GET http://localhost:8080/image/info/{name}
+- Pour supprimer une image
+DELETE http://localhost:8080/image/delete/{id}
+
+
+
+
+OBJECTIFS :
+- Relier la table image aux deux autres tables pour qu'un user ai une photo de profil et un meuble puissent avoir plusieurs images 
