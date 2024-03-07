@@ -115,7 +115,8 @@ export default function App() {
         <Routes>
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/panier" element={<Panier />} />
-          <Route path="/Login/*" element={<Login />} />
+          <Route path="/Login/*" element ={<Login/>} />
+          <Route path="/Encart" element={<Encart />} />
           <Route
             path="/"
             element={
@@ -142,7 +143,7 @@ export default function App() {
                         <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
                         <p>{furniture.nom}</p>
                         <p>Prix: {furniture.prix} €</p>
-                        <Encart />
+                      
                       </div>
                     ))
                   ) : (
@@ -151,7 +152,8 @@ export default function App() {
                         <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
                         <p>{furniture.nom}</p>
                         <p>Prix: {furniture.prix} €</p>
-                        <Encart />
+                        <a href="./encart">En savoir plus</a> 
+                      
                       </div>
                     ))
                   )}
