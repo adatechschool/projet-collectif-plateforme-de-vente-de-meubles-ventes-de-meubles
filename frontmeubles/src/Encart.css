@@ -1,0 +1,35 @@
+/* Encart.css */
+.encart {
+    position: relative;
+  }
+  
+  .popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-shadow: 0 50 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+  
+  }
+  
+  .popup p {
+    margin-bottom: 100px;
+  }
+  
+  .popup button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    margin-right: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .popup button:hover {
+    background-color: #0056b3;
+  }
