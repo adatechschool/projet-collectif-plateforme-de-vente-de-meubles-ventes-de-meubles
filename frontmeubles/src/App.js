@@ -83,6 +83,7 @@ export default function App() {
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/panier" element={<Panier />} />
           <Route path="/Login/*" element ={<Login/>} />
+          <Route path="/Encart" element={<Encart />} />
           <Route
             path="/"
             element={
@@ -110,8 +111,10 @@ export default function App() {
                     <div key={index} className="grid-item">
                       <img src={process.env.PUBLIC_URL + `/meuble/${image}`} alt={`Meuble ${index + 1}`} />
                       <p>Nom du Meuble {index + 1}</p>
-                      <p>Prix: [Ajouter le prix ici]</p><Encart/>
+                      <p>Prix: [Ajouter le prix ici]</p>
+                      <a href="./encart">En savoir plus</a> 
                     </div>
+                    
                   ))}
                 </div>
               </>
