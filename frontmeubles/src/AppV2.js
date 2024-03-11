@@ -1,6 +1,20 @@
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, NavLink, Route, Routes } from "react-router-dom";
+import Slider from "react-slick";
+import axios from 'axios';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./App.css";
+import Profile from "./pages/Profile.js";
+import Footer from "./component/Footer.js";
+import Encart from "./component/Encart.js";
+import Panier from "./pages/Panier.js";
+import Login from "./pages/Login.js";
+import ProductManagement from "./pages/gestionproduit.js";
+import NotFound from "./pages/NotFound.js";
+import SearchResults from "./component/SearchResults";
+import "./component/ListeProduit.js";
 
-<<<<<<< Updated upstream
 export default function App() {
   const [isNavOpen, setNavOpen] = useState(false);
   const [furnitureData, setFurnitureData] = useState([]);
@@ -33,7 +47,9 @@ export default function App() {
     };
   
     fetchFurnitureData();
+    
   }, []);
+
 
   const handleSearch = () => {
     const results = furnitureData.filter((furniture) =>
@@ -41,21 +57,9 @@ export default function App() {
     );
     setSearchResults(results);
   };
-=======
-import Profile from './pages/Profile';
-import Panier from './pages/Panier';
-import Login from './pages/Login';
-import Accueil from './pages/Accueil';
-import NavBar from './component/NavBar';
 
-
->>>>>>> Stashed changes
-
-function App() {
   return (
-    <div>
     <Router>
-<<<<<<< Updated upstream
       <div className="App">
         <header className="App-header">
           <div className="profile-container" onClick={toggleNav}>
@@ -78,16 +82,16 @@ function App() {
 
           {isNavOpen && (
             <div className="nav-bar">
-              <NavLink to="/" exact activeClassName="active-link">
+              <NavLink to="/" exact = "true" activeclassname="active-link">
                 Accueil
               </NavLink>
-              <NavLink to="/profile" activeClassName="active-link">
+              <NavLink to="/profile" activeclassname="active-link">
                 Profil
               </NavLink>
-              <NavLink to="/panier" activeClassName="active-link">
+              <NavLink to="/panier" activeclassname="active-link">
                 Mon Panier
               </NavLink>
-              <NavLink to ="/login" activeClassName="active-link">
+              <NavLink to ="/login" activeclassname="active-link">
                 Login
               </NavLink>
             </div>
@@ -120,43 +124,7 @@ function App() {
             path="/"
             element={
               <>
-                <div style={{ textAlign: "left", marginLeft: "100px" }}>
-                  <h2>Les Bons plans :</h2>
-                </div>
-                <Slider {...carouselSettings} className="carousel-container">
-                  {furnitureData.map((furniture) => (
-                    <div key={furniture.id} className="carousel-item">
-                      <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
-                      <p>{furniture.nom}</p>
-                    </div>
-                  ))}
-                </Slider>
-                <br></br>
-                <br></br>
-                <br></br>
-                <h3>Les Nouveautés:</h3>
-                <div className="grid-container">
-                  {searchResults.length > 0 ? (
-                    searchResults.map((furniture) => (
-                      <div key={furniture.id} className="grid-item">
-                        <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
-                        <p>{furniture.nom}</p>
-                        <p>Prix: {furniture.prix} €</p>
-                      
-                      </div>
-                    ))
-                  ) : (
-                    furnitureData.map((furniture) => (
-                      <div key={furniture.id} className="grid-item">
-                        <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
-                        <p>{furniture.nom}</p>
-                        <p>Prix: {furniture.prix} €</p>
-                        <a href="./encart">En savoir plus</a> 
-                      
-                      </div>
-                    ))
-                  )}
-                </div>
+              {/* page d'accueil */}
               </>
             }
           />
@@ -165,23 +133,6 @@ function App() {
         </Routes>
       </div>
       <Footer />
-=======
-      <div>
-      <NavBar />
-      <Routes>
-        <Route path="/accueil" exact element={<Accueil/>}/>
-        <Route path="/profil" element={<Profile/>}/>
-        <Route path="/panier" element={<Panier/>}/>
-        <Route path="/login" element={<Login/>}/>
-     </Routes>
-     </div>
->>>>>>> Stashed changes
     </Router>
-    </div>
   );
 }
-<<<<<<< Updated upstream
-// TEST //
-=======
-export default App;
->>>>>>> Stashed changes
