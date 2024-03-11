@@ -1,12 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
 
-// Configurer CORS pour autoriser toutes les origines (à ajuster en fonction de vos besoins)
-app.use(cors());
-
-// ... Vos autres configurations
-
-app.listen(8080, () => {
-  console.log('Server is running on port 8080');
-});
+app.use(cors(corsOptions)) 

@@ -46,7 +46,9 @@ export default function App() {
     };
   
     fetchFurnitureData();
+    
   }, []);
+
 
   const handleSearch = () => {
     const results = furnitureData.filter((furniture) =>
@@ -79,16 +81,16 @@ export default function App() {
 
           {isNavOpen && (
             <div className="nav-bar">
-              <NavLink to="/" exact activeClassName="active-link">
+              <NavLink to="/" exact = "true" activeclassname="active-link">
                 Accueil
               </NavLink>
-              <NavLink to="/profile" activeClassName="active-link">
+              <NavLink to="/profile" activeclassname="active-link">
                 Profil
               </NavLink>
-              <NavLink to="/panier" activeClassName="active-link">
+              <NavLink to="/panier" activeclassname="active-link">
                 Mon Panier
               </NavLink>
-              <NavLink to ="/login" activeClassName="active-link">
+              <NavLink to ="/login" activeclassname="active-link">
                 Login
               </NavLink>
             </div>

@@ -12,15 +12,18 @@ const Login = () => {
     e.preventDefault();
 
     try {
-        const response = await axios.post('http://localhost:8080/users/read', { email, password });
+      const response = await axios.post('http://localhost:8080/users/read', { email, password });
 
+      const userData = response.data.find(user => user.email === email && user.mdp === password);
 
-      const userData = response.data[0]; // Assuming the first user in the array is the matched user
+      if (userData) {
+        console.log('User logged in:', userData.nom);
 
-      console.log('User logged in:', userData.nom);
-
-      // Utilisation de l'ID pour la navigation vers le profil
-      navigate(`/profile/${userData.id}`);
+        // Utilisation de l'ID pour la navigation vers le profil
+        navigate(`/profile/${userData.id}`);
+      } else {
+        console.log('Email or password incorrect');
+      }
     } catch (error) {
       console.error('Error during login:', error);
     }
