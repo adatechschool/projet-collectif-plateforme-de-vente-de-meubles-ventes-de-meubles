@@ -9,9 +9,7 @@ import axios from 'axios';
 const Profile = () =>{
 
   const [Data, setData] = useState([]);
-  const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '',description:'', dimension: '',matieres:''});
-  const [matieres,setMatieres] = useState('');
-  
+  const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '',description:'', dimension: '',matieres:'', couleurs:'', type:''});
   
   useEffect(() => {
     const fetchData = async () => {
@@ -33,24 +31,17 @@ const Profile = () =>{
     console.log(newFurniture);
     console.log(newFurniture.matieres)
     axios.post("/meubles/create", newFurniture)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    
     // Ici, vous enverriez les données à votre backend ou base de données
     console.log(newFurniture);
     alert('Soumission envoyée !');
     // Réinitialiser le formulaire après la soumission
-    setNewFurniture({ nom: '', prix: '',description:'',dimension:'', matieres:'' });
+    setNewFurniture({ nom: '', prix: '',description:'',dimension:'', matieres:'',couleurs:'',type:'' });
   };
-
-  function test(truc){
-    console.log(truc);
-    console.log(truc.target.value)
-    setNewFurniture({matieres:(truc.target.value)});
-  }
+  const handleImageChange = (e) => {
+    setNewFurniture({ ...newFurniture, image: e.target.files[0] });
+  };
+  
   return (
     <section>
       <h2>Meubles mis en vente</h2>
@@ -70,15 +61,15 @@ const Profile = () =>{
                 type="text"
                 name="nom"
                 placeholder="Nom du meuble"
-                value={newFurniture.name}
+                value={newFurniture.nom}
                 onChange={handleChange}
                 required
               />
               <input
                 type="text"
                 name="prix"
-                placeholder="prix"
-                value={newFurniture.price}
+                placeholder="Prix"
+                value={newFurniture.prix}
                 onChange={handleChange}
                 required
               />
@@ -96,8 +87,10 @@ const Profile = () =>{
               value={newFurniture.dimension}
               onChange={handleChange}
               />
+              
               <span>Matière</span>
-              <select value={newFurniture.matieres} onChange={e => test(e)}>
+              <select name="matieres" value = {newFurniture.matieres} onChange={handleChange}>
+                <option defaultValue="select" >Selectionner une matière</option>
                 <option value="Plastique">Plastique</option>
                 <option value="Osier">Osier</option>
                 <option value="Rotin">Rotin</option>
@@ -111,8 +104,9 @@ const Profile = () =>{
                 <option value="MDF">MDF</option>
                 <option value="Bois_de_placage">Bois de placage</option>
               </select>
-              <span>Couleurs</span>
-              <select value={newFurniture.couleurs} onChange={e => setNewFurniture(e.target.value)}>
+              <span>Couleur</span>
+              <select name="couleurs" value={newFurniture.couleurs} onChange={handleChange}>
+                  <option defaultValue="select" >Selectionner une couleur</option>
                   <option value="noir">Noir</option>
                   <option value="pourpre">Pourpre</option>
                   <option value="rouge">Rouge</option>
@@ -131,7 +125,8 @@ const Profile = () =>{
                   <option value="bordeaux">Bordeaux</option>
             </select>
             <span>Type</span>
-            <select value={newFurniture.type} onChange={e => setNewFurniture(e.target.value)}>
+            <select name="type" value={newFurniture.type} onChange={handleChange}>
+                <option defaultValue="select" >Selectionner un type</option>
                 <option value="canape">Canapé</option>
                 <option value="fauteuil">Fauteuil</option>
                 <option value="table">Table</option>
@@ -154,6 +149,8 @@ const Profile = () =>{
                 <option value="meuble_de_salle_de_bain">Meuble de salle de bain</option>
                 <option value="meuble_de_cuisine">Meuble de cuisine</option>
               </select>
+              <span>Ajouter des images</span>
+              <input type="file" name="image" onChange={handleImageChange} />
               <button type="submit">Soumettre le meuble</button>
             </form>
           </div>
