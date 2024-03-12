@@ -8,6 +8,7 @@
 -- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+show collation like 'utf8mb4%';
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `images`
 --
 
-CREATE IF NOT EXISTS  TABLE `images` (
+CREATE TABLE  IF NOT EXISTS `images` (
   `id` bigint(20) NOT NULL,
   `image` blob,
   `name` varchar(255) DEFAULT NULL,
