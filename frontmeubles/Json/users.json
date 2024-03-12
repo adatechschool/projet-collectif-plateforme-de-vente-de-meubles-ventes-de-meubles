@@ -1,0 +1,25 @@
+{
+    "users": [
+    {
+        "id": 1,
+        "nom": "Laureline",
+        "email": "admin@admin.com",
+        "mdp": "test",
+        "admin": true
+    },
+    {
+        "id": 2,
+        "nom": "Sabri",
+        "email": "sabri@sabri.com",
+        "mdp": "sabri",
+        "admin": false
+    },
+    {
+        "id": 3,
+        "nom": "Mame",
+        "email": "mame@mame.com",
+        "mdp": "mame",
+        "admin": false
+    }
+  ]
+}
