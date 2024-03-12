@@ -17,9 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `projet_meuble`
---
+
 
 -- --------------------------------------------------------
 
@@ -57,11 +55,7 @@ INSERT INTO `meubles` (`id`, `couleurs`, `description`, `dimension`, `matieres`,
 (4, 'orange', 'Ne tient pas seul, mais ça passe.', '45x50x80', 'Bois_de_placage', 'Chaise haute', 49, 'chaise', 0, 2),
 (5, 'jaune', 'Lit pour poupée par Chrichri diodior.', '160x200', 'Bois_recyclé', 'Lit en papier crépon', 599, 'lit', 0, 1);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `users`
---
 
 --
 -- Dumping data for table `users`
@@ -95,8 +89,7 @@ ALTER TABLE `meubles`
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+
 
 --
 -- AUTO_INCREMENT for dumped tables
