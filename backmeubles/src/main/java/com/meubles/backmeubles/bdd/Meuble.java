@@ -13,16 +13,19 @@ public class Meuble {
     private Integer id;
 
     private String nom;
-    @Enumerated(EnumType.STRING)
 
+    @Enumerated(EnumType.STRING)
     private Types type;
 
     private Integer prix;
     private String dimension;
+
     @Enumerated(EnumType.STRING)
     private Couleurs couleurs;
+
     @Enumerated(EnumType.STRING)
     private Matieres matieres;
+
     @Column(length = 150)
 
     private String description;
