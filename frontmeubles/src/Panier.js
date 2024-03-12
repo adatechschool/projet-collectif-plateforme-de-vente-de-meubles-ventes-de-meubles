@@ -1,6 +1,3 @@
-// Example pour afficher les meubles aux images 
-//A renommer Panier.js pour voir dans le site
-
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './Panier.css';
@@ -11,14 +8,14 @@ const Panier = () => {
   useEffect(() => {
     const fetchFurnitureData = async () => {
       try {
-        const response = await axios.get('/meubles/read'); 
-        console.log('Response from API:', response.data);
+        const response = await axios.get('/meubles/read');
+        console.log('Response from Meubles API:', response.data);
         setFurnitureData(response.data);
       } catch (error) {
         console.error('Error fetching furniture data:', error);
       }
     };
-  
+
     fetchFurnitureData();
   }, []);
 
@@ -36,6 +33,8 @@ const Panier = () => {
               />
             ))}
             <p>{furniture.nom}</p>
+            <p>Prix : {furniture.prix} €</p>
+            <p>De : {furniture.user?.nom}</p>
           </div>
         ))}
       </div>

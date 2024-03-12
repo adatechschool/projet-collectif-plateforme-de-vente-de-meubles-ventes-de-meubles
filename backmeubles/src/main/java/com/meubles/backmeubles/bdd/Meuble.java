@@ -42,7 +42,7 @@ public class Meuble {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
+
     private User user;
 
     @OneToMany(mappedBy = "meuble", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
