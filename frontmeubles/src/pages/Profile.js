@@ -8,13 +8,18 @@ import axios from 'axios';
 
 const Profile = () =>{
 
-  const [Data, setData] = useState([]);
-  const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '',description:'', dimension: '',matieres:'', couleurs:'', type:''});
   
+  const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '',description:'', dimension: '',matieres:'', couleurs:'', type:''});
+  const [Data, setData] = useState([]);
+  const [Matieres, setMatieres] = useState({});
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await api("get", "/meubles/read");
+        const listMatieres = await api("get", "/meubles/matieres");
+        console.log("Liste:" + listMatieres)
+        setMatieres(listMatieres);
+        console.log("Matières : " + Matieres)
         setData(result);
       } catch (error) {
         console.error(error);
@@ -41,6 +46,13 @@ const Profile = () =>{
   const handleImageChange = (e) => {
     setNewFurniture({ ...newFurniture, image: e.target.files[0] });
   };
+
+  let matiereTableau;
+  if(typeof Matieres === 'object') { 
+    matiereTableau = Object.values(Matieres);
+  } else {
+    matiereTableau = JSON.parse(Matieres).map(item => item.value);
+  }
   
   return (
     <section>
@@ -89,20 +101,14 @@ const Profile = () =>{
               />
               
               <span>Matière</span>
+     
               <select name="matieres" value = {newFurniture.matieres} onChange={handleChange}>
                 <option defaultValue="select" >Selectionner une matière</option>
-                <option value="Plastique">Plastique</option>
-                <option value="Osier">Osier</option>
-                <option value="Rotin">Rotin</option>
-                <option value="Pierre">Pierre</option>
-                <option value="Verre">Verre</option>
-                <option value="Métal">Métal</option>
-                <option value="Bois_récupéré">Bois récupéré</option>
-                <option value="Bois_recyclé">Bois recyclé</option>
-                <option value="Contreplaqué">Contreplaqué</option>
-                <option value="Formica">Formica</option>
-                <option value="MDF">MDF</option>
-                <option value="Bois_de_placage">Bois de placage</option>
+                    {
+                      matiereTableau && matiereTableau.length > 0  &&  matiereTableau.map((item, index)=>{
+                          return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
+                      })
+                    }
               </select>
               <span>Couleur</span>
               <select name="couleurs" value={newFurniture.couleurs} onChange={handleChange}>
