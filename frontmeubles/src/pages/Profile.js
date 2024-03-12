@@ -12,46 +12,62 @@ const Profile = () =>{
   const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '',description:'', dimension: '',matieres:'', couleurs:'', type:''});
   const [Data, setData] = useState([]);
   const [Matieres, setMatieres] = useState({});
+  const [Couleurs, setCouleurs] = useState({});
+  const [Type, setType] = useState({});
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await api("get", "/meubles/read");
-        const listMatieres = await api("get", "/meubles/matieres");
-        console.log("Liste:" + listMatieres)
-        setMatieres(listMatieres);
-        console.log("Matières : " + Matieres)
         setData(result);
+        const listMatieres = await api("get", "/meubles/matieres");
+        setMatieres(listMatieres);
+        const listCouleurs = await api("get", "/meubles/couleurs");
+        setCouleurs(listCouleurs);
+        const listType = await api("get", "/meubles/types");
+        setType(listType); 
+        console.log("bonjour" + newFurniture.matieres);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData()
   }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewFurniture({ ...newFurniture, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newFurniture);
-    console.log(newFurniture.matieres)
+    console.log(typeof(newFurniture));
+    console.log("coco" + typeof(newFurniture.matieres));
+    console.log(typeof(newFurniture.nom));
     axios.post("/meubles/create", newFurniture)
-    
-    // Ici, vous enverriez les données à votre backend ou base de données
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     console.log(newFurniture);
     alert('Soumission envoyée !');
-    // Réinitialiser le formulaire après la soumission
-    setNewFurniture({ nom: '', prix: '',description:'',dimension:'', matieres:'',couleurs:'',type:'' });
+    setNewFurniture({ nom: '', prix: '', description:'', dimension:'',matieres:'', couleurs:'', type:'' });
   };
+
   const handleImageChange = (e) => {
     setNewFurniture({ ...newFurniture, image: e.target.files[0] });
   };
 
-  let matiereTableau;
-  if(typeof Matieres === 'object') { 
-    matiereTableau = Object.values(Matieres);
-  } else {
-    matiereTableau = JSON.parse(Matieres).map(item => item.value);
+  const enumValue = (nom) => {
+    let Tableau;
+    if(typeof nom === 'object') {
+      Tableau = Object.values(nom);
+    } else {
+      Tableau = JSON.parse(nom).map(item => item.value);
+    }
+    return Tableau;
   }
   
   return (
@@ -63,7 +79,7 @@ const Profile = () =>{
                         <p>{Data.nom}</p>
                         <p>price: {Data.prix} €</p>
                         <a href="./encart">En savoir plus</a> 
-                      </div>))};
+                      </div>))}
       </div>
 
       <div className="submit-furniture-section">
@@ -102,58 +118,28 @@ const Profile = () =>{
               
               <span>Matière</span>
      
-              <select name="matieres" value = {newFurniture.matieres} onChange={handleChange}>
-                <option defaultValue="select" >Selectionner une matière</option>
-                    {
-                      matiereTableau && matiereTableau.length > 0  &&  matiereTableau.map((item, index)=>{
+              <select name="matieres" value = {newFurniture.matieres} onChange={handleChange} required>
+                <option value=''>Selectionner une matière</option>
+                {enumValue(Matieres) && enumValue(Matieres).length >= 0  &&  enumValue(Matieres).map((item, index)=>{
                           return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
                       })
                     }
               </select>
               <span>Couleur</span>
-              <select name="couleurs" value={newFurniture.couleurs} onChange={handleChange}>
-                  <option defaultValue="select" >Selectionner une couleur</option>
-                  <option value="noir">Noir</option>
-                  <option value="pourpre">Pourpre</option>
-                  <option value="rouge">Rouge</option>
-                  <option value="orange">Orange</option>
-                  <option value="jaune">Jaune</option>
-                  <option value="vert">Vert</option>
-                  <option value="bleu">Bleu</option>
-                  <option value="violet">Violet</option>
-                  <option value="ivoire">Ivoire</option>
-                  <option value="crème">Crème</option>
-                  <option value="beige">Beige</option>
-                  <option value="rose">Rose</option>
-                  <option value="kaki">Kaki</option>
-                  <option value="brun">Brun</option>
-                  <option value="marron">Marron</option>
-                  <option value="bordeaux">Bordeaux</option>
+              <select name="couleurs" value={newFurniture.couleurs} onChange={handleChange} required>
+                  <option value='' >Selectionner une couleur</option>
+                  {enumValue(Couleurs) && enumValue(Couleurs).length >= 0  &&  enumValue(Couleurs).map((item, index)=>{
+                          return <option key={index} value={item}>{item}</option>;
+                      })
+                    }
             </select>
             <span>Type</span>
-            <select name="type" value={newFurniture.type} onChange={handleChange}>
-                <option defaultValue="select" >Selectionner un type</option>
-                <option value="canape">Canapé</option>
-                <option value="fauteuil">Fauteuil</option>
-                <option value="table">Table</option>
-                <option value="chaise">Chaise</option>
-                <option value="lit">Lit</option>
-                <option value="armoire">Armoire</option>
-                <option value="commode">Commode</option>
-                <option value="buffet">Buffet</option>
-                <option value="bibliotheque">Bibliothèque</option>
-                <option value="etagere">Etagère</option>
-                <option value="bureau">Bureau</option>
-                <option value="table_de_travail">Table de travail</option>
-                <option value="meuble_tv">Meuble TV</option>
-                <option value="banc">Banc</option>
-                <option value="tabouret">Tabouret</option>
-                <option value="pouf">Pouf</option>
-                <option value="coiffeuse">Coiffeuse</option>
-                <option value="vaisselier">Vaisselier</option>
-                <option value="pouf">Pouf</option>
-                <option value="meuble_de_salle_de_bain">Meuble de salle de bain</option>
-                <option value="meuble_de_cuisine">Meuble de cuisine</option>
+            <select name="type" value={newFurniture.type} onChange={handleChange} required>
+                <option value='' >Selectionner un type</option>
+                {enumValue(Type) && enumValue(Type).length >= 0  &&  enumValue(Type).map((item, index)=>{
+                          return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
+                      })
+                    }
               </select>
               <span>Ajouter des images</span>
               <input type="file" name="image" onChange={handleImageChange} />
