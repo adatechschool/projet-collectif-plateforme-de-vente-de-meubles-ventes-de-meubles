@@ -54,6 +54,7 @@ const Profile = () =>{
     console.log(newFurniture);
     alert('Soumission envoyée !');
     setNewFurniture({ nom: '', prix: '', description:'', dimension:'',matieres:'', couleurs:'', type:'' });
+    window.location.reload(false);
   };
 
   const handleImageChange = (e) => {
