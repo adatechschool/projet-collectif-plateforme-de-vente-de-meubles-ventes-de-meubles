@@ -27,13 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `images`
 --
 
-CREATE TABLE `images` (
-  `id` bigint(20) NOT NULL,
-  `image` blob,
-  `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `meuble_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Dumping data for table `images`
@@ -52,19 +46,6 @@ INSERT INTO `images` (`id`, `image`, `name`, `type`, `meuble_id`) VALUES
 -- Table structure for table `meubles`
 --
 
-CREATE TABLE `meubles` (
-  `id` int(11) NOT NULL,
-  `couleurs` enum('noir','pourpre','rouge','orange','jaune','vert','bleu','violet','ivoire','crème','beige','rose','kaki','brun','marron','bordeaux') DEFAULT NULL,
-  `description` varchar(150) DEFAULT NULL,
-  `dimension` varchar(255) DEFAULT NULL,
-  `matieres` enum('Contreplaqué','Formica','MDF','Bois_de_placage','Bois_recyclé','Bois_récupéré','Métal','Verre','Pierre','Rotin','Osier','Plastique') DEFAULT NULL,
-  `nom` varchar(255) DEFAULT NULL,
-  `prix` int(11) DEFAULT NULL,
-  `type` enum('canape','fauteuil','table','chaise','lit','armoire','commode','buffet','bibliotheque','etagere','bureau','table_de_travail','meuble_tv','banc','tabouret','pouf','coiffeuse','vaisselier','meuble_de_cuisine','meuble_de_salle_de_bain') DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `meubles`
 --
@@ -81,14 +62,6 @@ INSERT INTO `meubles` (`id`, `couleurs`, `description`, `dimension`, `matieres`,
 --
 -- Table structure for table `users`
 --
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `admin` bit(1) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `mdp` varchar(255) DEFAULT NULL,
-  `nom` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
