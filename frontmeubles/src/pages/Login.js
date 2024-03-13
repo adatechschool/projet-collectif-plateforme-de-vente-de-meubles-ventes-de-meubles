@@ -19,6 +19,9 @@ const Login = () => {
       if (userData) {
         console.log('User logged in:', userData.nom);
 
+        // Enregistrez l'ID de l'utilisateur dans le localStorage
+        localStorage.setItem('userId', userData.id);
+
         // Utilisation de l'ID pour la navigation vers le profil
         navigate(`/profile/${userData.id}`);
       } else {

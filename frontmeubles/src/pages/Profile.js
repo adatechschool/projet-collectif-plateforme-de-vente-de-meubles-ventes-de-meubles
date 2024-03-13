@@ -4,16 +4,12 @@ import '../App.css';
 import api from "../fetch.js";
 import axios from 'axios';
 
-
-
-const Profile = () =>{
-
-  
-  const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '',description:'', dimension: '',matieres:'', couleurs:'', type:''});
-  const [Data, setData] = useState([]);
-  const [Matieres, setMatieres] = useState({});
-  const [Couleurs, setCouleurs] = useState({});
-  const [Type, setType] = useState({});
+const Profile = () => {
+  const [newFurniture, setNewFurniture] = useState({ nom: '', prix: '', description:'', dimension: '', matieres:'', couleurs:'', type:'' });
+  const [data, setData] = useState([]);
+  const [matieres, setMatieres] = useState({});
+  const [couleurs, setCouleurs] = useState({});
+  const [type, setType] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,13 +21,12 @@ const Profile = () =>{
         const listCouleurs = await api("get", "/meubles/couleurs");
         setCouleurs(listCouleurs);
         const listType = await api("get", "/meubles/types");
-        setType(listType); 
-        console.log("bonjour" + newFurniture.matieres);
+        setType(listType);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchData()
+    fetchData();
   }, []);
 
   const handleChange = (e) => {
@@ -41,19 +36,24 @@ const Profile = () =>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(typeof(newFurniture));
-    console.log("coco" + typeof(newFurniture.matieres));
-    console.log(typeof(newFurniture.nom));
+
+    // Récupérer l'ID de l'utilisateur depuis le localStorage
+    const userId = localStorage.getItem('userId');
+
+    // Ajouter l'ID de l'utilisateur à la nouvelle proposition de meuble
+    setNewFurniture({ ...newFurniture, user_id: userId });
+
     axios.post("/meubles/create", newFurniture)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     console.log(newFurniture);
     alert('Soumission envoyée !');
-    setNewFurniture({ nom: '', prix: '', description:'', dimension:'',matieres:'', couleurs:'', type:'' });
+    setNewFurniture({ nom: '', prix: '', description:'', dimension:'', matieres:'', couleurs:'', type:'' });
     window.location.reload(false);
   };
 
@@ -62,96 +62,97 @@ const Profile = () =>{
   };
 
   const enumValue = (nom) => {
-    let Tableau;
-    if(typeof nom === 'object') {
-      Tableau = Object.values(nom);
+    let tableau;
+    if (typeof nom === 'object') {
+      tableau = Object.values(nom);
     } else {
-      Tableau = JSON.parse(nom).map(item => item.value);
+      tableau = JSON.parse(nom).map(item => item.value);
     }
-    return Tableau;
-  }
-  
+    return tableau;
+  };
+
+  console.log('Connecté sur le profil en user_id :', localStorage.getItem('userId'));
+
   return (
     <section>
       <h2>Meubles mis en vente</h2>
       <div className='grid-container'>
-      {Data.map((Data) => (
-                      <div key={Data.id} className="grid-item">
-                        <p>{Data.nom}</p>
-                        <p>price: {Data.prix} €</p>
-                        <a href="./encart">En savoir plus</a> 
-                      </div>))}
+        {data.map((item) => (
+          <div key={item.id} className="grid-item">
+            <p>{item.nom}</p>
+            <p>price: {item.prix} €</p>
+            <a href="./encart">En savoir plus</a> 
+          </div>
+        ))}
       </div>
 
       <div className="submit-furniture-section">
-            <h2>Proposer un meuble à vendre</h2>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="nom"
-                placeholder="Nom du meuble"
-                value={newFurniture.nom}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="prix"
-                placeholder="Prix"
-                value={newFurniture.prix}
-                onChange={handleChange}
-                required
-              />
-              <input
-              type='text'
-              name='description'
-              placeholder='Courte description'
-              value={newFurniture.description}
-              onChange={handleChange}
-              />
-              <input
-              type='text'
-              name='dimension'
-              placeholder='Dimensions'
-              value={newFurniture.dimension}
-              onChange={handleChange}
-              />
-              
-              <span>Matière</span>
-     
-              <select name="matieres" value = {newFurniture.matieres} onChange={handleChange} required>
-                <option value=''>Selectionner une matière</option>
-                {enumValue(Matieres) && enumValue(Matieres).length >= 0  &&  enumValue(Matieres).map((item, index)=>{
-                          return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
-                      })
-                    }
-              </select>
-              <span>Couleur</span>
-              <select name="couleurs" value={newFurniture.couleurs} onChange={handleChange} required>
-                  <option value='' >Selectionner une couleur</option>
-                  {enumValue(Couleurs) && enumValue(Couleurs).length >= 0  &&  enumValue(Couleurs).map((item, index)=>{
-                          return <option key={index} value={item}>{item}</option>;
-                      })
-                    }
-            </select>
-            <span>Type</span>
-            <select name="type" value={newFurniture.type} onChange={handleChange} required>
-                <option value='' >Selectionner un type</option>
-                {enumValue(Type) && enumValue(Type).length >= 0  &&  enumValue(Type).map((item, index)=>{
-                          return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
-                      })
-                    }
-              </select>
-              <span>Ajouter des images</span>
-              <input type="file" name="image" onChange={handleImageChange} />
-              <button type="submit">Soumettre le meuble</button>
-            </form>
-          </div>
+        <h2>Proposer un meuble à vendre</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="nom"
+            placeholder="Nom du meuble"
+            value={newFurniture.nom}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="prix"
+            placeholder="Prix"
+            value={newFurniture.prix}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type='text'
+            name='description'
+            placeholder='Courte description'
+            value={newFurniture.description}
+            onChange={handleChange}
+          />
+          <input
+            type='text'
+            name='dimension'
+            placeholder='Dimensions'
+            value={newFurniture.dimension}
+            onChange={handleChange}
+          />
+          <span>Matière</span>
+          <select name="matieres" value = {newFurniture.matieres} onChange={handleChange} required>
+            <option value=''>Selectionner une matière</option>
+            {enumValue(matieres) && enumValue(matieres).length >= 0 &&  enumValue(matieres).map((item, index)=>{
+              return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
+            })}
+          </select>
+          <span>Couleur</span>
+          <select name="couleurs" value={newFurniture.couleurs} onChange={handleChange} required>
+            <option value='' >Selectionner une couleur</option>
+            {enumValue(couleurs) && enumValue(couleurs).length >= 0 &&  enumValue(couleurs).map((item, index)=>{
+              return <option key={index} value={item}>{item}</option>;
+            })}
+          </select>
+          <span>Type</span>
+          <select name="type" value={newFurniture.type} onChange={handleChange} required>
+            <option value='' >Selectionner un type</option>
+            {enumValue(type) && enumValue(type).length >= 0 &&  enumValue(type).map((item, index)=>{
+              return <option key={index} value={item}>{item.replaceAll('_', ' ')}</option>;
+            })}
+          </select>
+          <span>Ajouter des images</span>
+          <input type="file" name="image" onChange={handleImageChange} />
+          {/* Ajout du champ user_id */}
+          <input
+            type="hidden"
+            name="user_id"
+         
+          />
+          <button type="submit">Soumettre le meuble</button>
+        </form>
+      </div>
     </section>
-  )
- 
-
+  );
 };
-
 
 export default Profile;

@@ -41,9 +41,10 @@ public class Meuble {
     private Integer stock = 0;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-
+    @JoinColumn(name = "user_id", nullable = false, columnDefinition = "INT DEFAULT 1")
     private User user;
+
+
 
     @OneToMany(mappedBy = "meuble", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Image> images;

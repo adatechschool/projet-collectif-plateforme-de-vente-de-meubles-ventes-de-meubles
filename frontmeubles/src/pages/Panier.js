@@ -3,6 +3,14 @@ import axios from 'axios';
 import './Panier.css';
 
 const Panier = () => {
+  
+    // je recupere l'ID de l'utilisateur depuis le localStorage
+    const userId = localStorage.getItem('userId');
+
+    //  normalement le console log avec la page ou on est
+    console.log(`Connecté accueil en : ${userId}`);
+  
+
   const [furnitureData, setFurnitureData] = useState([]);
 
   useEffect(() => {
