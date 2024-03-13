@@ -10,7 +10,8 @@ import axios from "axios";
 const Accueil = () => {
 
     const [furnitureData, setFurnitureData] = useState([]);
-    const [searchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
+
     const carouselSettings = {
         dots: true,
         infinite: true,
@@ -19,6 +20,33 @@ const Accueil = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
+      };
+
+      const filtreCroissant = async () => {
+        try {
+          const response = await axios.get('/meubles/read?prixTri=prixTri&direction=croissant');
+          setSearchResults(response.data);
+        } catch (error) {
+          console.error('Error fetching furniture data:', error);
+        }
+      };
+      
+      const filtreDecroissant = async () => {
+        try {
+          const response = await axios.get('/meubles/read?prixTri=prixTri&direction=decroissant');
+          setSearchResults(response.data);
+        } catch (error) {
+          console.error('erreur:', error);
+        }
+      };
+
+      const resetSort = async () => {
+        try {
+          const response = await axios.get('/meubles/read');
+          setSearchResults(response.data);
+        } catch (error) {
+          console.error('erreur:', error);
+        }
       };
     
       useEffect(() => {
@@ -51,6 +79,12 @@ const Accueil = () => {
                 <br></br>
                 <br></br>
                 <h3>Les Nouveautés:</h3>
+                <label>Trier par prix :</label>
+                <select>
+                  <option onClick={resetSort}>Sélectionnez</option>
+                  <option onClick={filtreCroissant}>Croissant</option>
+                  <option onClick={filtreDecroissant}>Decroissant</option>
+                </select>
                 <div className="grid-container">
                   {searchResults.length > 0 ? (
                     searchResults.map((furniture) => (
