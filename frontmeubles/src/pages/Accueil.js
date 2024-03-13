@@ -70,7 +70,14 @@ const Accueil = () => {
                 <Slider {...carouselSettings} className="carousel-container">
                   {furnitureData.map((furniture) => (
                     <div key={furniture.id} className="carousel-item">
-                      <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
+                                  {furniture.images.map((image) => (
+                          <img
+                            key={image.id}
+                            src={`http://localhost:8080/image/${image.name}`}
+                            alt={`Meuble ${furniture.id}`}
+                          />
+                        ))}
+                      
                       <p>{furniture.nom}</p>
                     </div>
                   ))}
@@ -89,7 +96,13 @@ const Accueil = () => {
                   {searchResults.length > 0 ? (
                     searchResults.map((furniture) => (
                       <div key={furniture.id} className="grid-item">
-                        <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
+                          {furniture.images.map((image) => (
+                          <img
+                            key={image.id}
+                            src={`http://localhost:8080/image/${image.name}`}
+                            alt={`Meuble ${furniture.id}`}
+                          />
+                        ))}
                         <p>{furniture.nom}</p>
                         <p>Prix: {furniture.prix} €</p>
                       
@@ -98,7 +111,13 @@ const Accueil = () => {
                   ) : (
                     furnitureData.map((furniture) => (
                       <div key={furniture.id} className="grid-item">
-                        <img src={process.env.PUBLIC_URL + `/meuble/${furniture.image}`} alt={`Meuble ${furniture.id}`} />
+                                                          {furniture.images.map((image) => (
+                          <img
+                            key={image.id}
+                            src={`http://localhost:8080/image/${image.name}`}
+                            alt={`Meuble ${furniture.id}`}
+                          />
+                        ))}
                         <p>{furniture.nom}</p>
                         <p>Prix: {furniture.prix} €</p>
                         <a href="./encart">En savoir plus</a> 
