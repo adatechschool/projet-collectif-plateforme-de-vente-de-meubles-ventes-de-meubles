@@ -1,8 +1,5 @@
 package com.meubles.backmeubles.controller;
-import com.meubles.backmeubles.bdd.Couleurs;
-import com.meubles.backmeubles.bdd.Matieres;
 import com.meubles.backmeubles.bdd.Meuble;
-import com.meubles.backmeubles.bdd.Types;
 import com.meubles.backmeubles.service.MeubleService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -36,21 +33,6 @@ public class MeubleController {
             }
         }
         return meubles;
-    }
-
-    @GetMapping("/types")
-    public Types[] getAllTypes() {
-        return Types.values();
-    }
-
-    @GetMapping("/matieres")
-    public Matieres[] getAllMatieres() {
-        return Matieres.values();
-    }
-
-    @GetMapping("/couleurs")
-    public Couleurs[] getAllCouleurs() {
-        return Couleurs.values();
     }
     @PutMapping("/update/{id}")
     public Meuble update(@PathVariable Integer id, @RequestBody Meuble meuble) {

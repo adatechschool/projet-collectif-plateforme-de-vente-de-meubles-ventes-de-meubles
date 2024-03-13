@@ -34,7 +34,6 @@ public class UserService implements tableService<User>{
         return repositoryUser.findById(id)
         .map(u -> { u.setNom(user.getNom());
             u.setEmail(user.getEmail());
-            u.setImage_user(user.getImage_user());
             u.setMdp(user.getMdp());
             u.setAdmin(user.getAdmin());
             return repositoryUser.save(u);
