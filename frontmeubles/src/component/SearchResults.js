@@ -1,5 +1,5 @@
 import React from "react";
-import Encart from "./encart";
+import Encart from "./Encart";
 
 const SearchResults = ({ results }) => {
   return (

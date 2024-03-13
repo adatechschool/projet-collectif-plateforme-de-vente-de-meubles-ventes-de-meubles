@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from './listeproduit';
+import ProductList from '../component/ListeProduit';
 
 // Simuler une API
 const fakeApi = {
