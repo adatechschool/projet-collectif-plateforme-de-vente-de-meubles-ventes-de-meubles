@@ -23,11 +23,15 @@ id est en auto incrémentation
 
 
 - Accéder à la liste des users:
-GET http://localhost:8080/users/read
+GET http://localhost:8080/users/list
 TRIER par nom alphabétique la liste des users:
 GET http://localhost:8080/users/read?nomTriAlphabetique=nomTriAlphabetique
 
 Le tri n'est pas obligatoire pour accéder à la liste
+
+-Login  côté client à la liste des users
+
+il faut fecther les données à http://localhost:8080/users/login pour pouvoir bypasser les problèmes liés a cors
 
 - Modifier un user:
 PUT http://localhost:8080/users/update/{id}

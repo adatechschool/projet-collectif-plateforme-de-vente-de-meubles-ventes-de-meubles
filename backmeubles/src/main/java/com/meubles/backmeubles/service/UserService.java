@@ -5,8 +5,12 @@ import com.meubles.backmeubles.repositoryBdd.RepositoryUser;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +26,9 @@ public class UserService implements tableService<User>{
     public List<User> lire() {
         return repositoryUser.findAll();
     }
-
+    public Optional<User> findByEmailAndPassword(String email, String password) {
+        return repositoryUser.findByEmailAndMdp(email, password);
+    }
     @Override
     public User modifier(Integer id, User user) {
         return repositoryUser.findById(id)

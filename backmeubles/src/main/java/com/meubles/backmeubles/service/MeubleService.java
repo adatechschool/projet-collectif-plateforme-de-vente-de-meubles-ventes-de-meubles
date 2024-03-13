@@ -14,6 +14,12 @@ public class MeubleService implements tableService<Meuble>{
 
     private final RepositoryMeuble repositoryMeuble;
 
+
+
+
+
+
+
     @Override
     public Meuble creer(Meuble meuble) {
         return repositoryMeuble.save(meuble);
@@ -35,6 +41,7 @@ public class MeubleService implements tableService<Meuble>{
                     m.setCouleurs(meuble.getCouleurs());
                     m.setMatieres(meuble.getMatieres());
                     m.setDescription(meuble.getDescription());
+                    m.setStock(meuble.getStock());
                     return repositoryMeuble.save(m);
                 }).orElseThrow(()-> new RuntimeException("Meuble non trouvé"));
     }
