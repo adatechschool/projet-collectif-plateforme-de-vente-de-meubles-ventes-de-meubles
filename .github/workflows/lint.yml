@@ -1,0 +1,19 @@
+name: Linters
+
+on: [ push, pull_request ]
+
+jobs:
+
+  java_formatting:
+    name: Linter for Java code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the project
+        uses: actions/checkout@v4
+      - name: Apply the linter on sources
+        uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--replace"
+          skip-commit: true
+      - name: Print diffs
+        run: git --no-pager diff --exit-code
